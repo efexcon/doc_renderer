@@ -1,0 +1,74 @@
+version: "1.0"
+
+document_type:
+  key: "angebot"
+  label: "Angebot"
+
+requirements:
+  metadata: true
+  markdown_content: true
+  line_items: true
+  timesheet: false
+
+layout:
+  has_cover_page: false
+  has_toc: false
+  has_address_block: true
+  has_metadata_block: true
+  has_line_item_table: true
+  has_totals_block: true
+  has_notes_block: true
+
+header:
+  show_logo: true
+
+footer:
+  show_author: true
+  show_title: true
+  show_page_numbers: true
+
+metadata_fields:
+  required:
+    - title
+    - document_id
+    - date
+    - sender
+    - recipient
+    - currency
+  optional:
+    - valid_until
+    - reference
+    - customer_id
+    - project_code
+
+line_item_table:
+  columns:
+    - key: position
+      label: "Pos."
+    - key: description
+      label: "Leistung"
+    - key: quantity
+      label: "Menge"
+    - key: unit
+      label: "Einheit"
+    - key: unit_price
+      label: "Einzelpreis"
+    - key: total
+      label: "Betrag"
+
+calculation:
+  subtotal: true
+  tax: true
+  grand_total: true
+  discount_supported: true
+  currency_format: "de-CH"
+
+assembly:
+  order:
+    - address_block
+    - metadata_block
+    - title
+    - markdown_intro
+    - line_item_table
+    - totals_block
+    - notes_block
