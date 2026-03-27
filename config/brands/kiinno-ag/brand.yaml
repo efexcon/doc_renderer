@@ -1,0 +1,27 @@
+version: "1.0"
+
+brand:
+  key: "kiinno-ag"
+  name: "KIINNO AG"
+
+identity:
+  sender_profiles:
+    - id: "sales-default"
+      display_name: "KIINNO AG"
+      email: "info@kiinno.swiss"
+
+company:
+  address:
+    street: "Baarerstrasse 52"
+    postal_code: "6300"
+    city: "Zug"
+    country: "Schweiz"
+
+assets:
+  logo_header: "assets/logo.svg"
+
+templates:
+  angebot:
+    docx: "templates/angebot.docx"
+  konzept:
+    docx: "templates/konzept.docx"
