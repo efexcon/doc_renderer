@@ -1,0 +1,45 @@
+version: "1.0"
+
+document_type:
+  key: "konzept"
+  label: "Konzept"
+
+requirements:
+  metadata: true
+  markdown_content: true
+  line_items: false
+  timesheet: false
+
+layout:
+  has_cover_page: true
+  has_toc: true
+  has_address_block: false
+  has_metadata_block: true
+  has_line_item_table: false
+  has_totals_block: false
+  has_notes_block: false
+
+header:
+  show_logo: true
+
+footer:
+  show_author: true
+  show_title: true
+  show_page_numbers: true
+
+metadata_fields:
+  required:
+    - title
+    - document_id
+    - date
+    - author
+  optional:
+    - subtitle
+    - version
+    - classification
+
+assembly:
+  order:
+    - cover_page
+    - toc
+    - markdown_body
