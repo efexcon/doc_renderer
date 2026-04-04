@@ -10,6 +10,7 @@ from typing import Any
 
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 # Ensure src/ is importable when running as package
@@ -21,6 +22,7 @@ from render_docx import ensure_pandoc, resolve_reference_doc  # noqa: E402
 import subprocess  # noqa: E402
 
 CONFIG_ROOT = Path(__file__).resolve().parent.parent / "config"
+STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
 
 app = FastAPI(
     title="SOVAIA Document Renderer",
@@ -62,6 +64,12 @@ def _render_to_docx(assembled_md: str, brand: str, doc_type: str, doc_id: str) -
 
 
 # --- Endpoints ---
+
+@app.get("/")
+def root():
+    """Serve the demo UI."""
+    return FileResponse(str(STATIC_DIR / "index.html"))
+
 
 @app.get("/health")
 def health():
@@ -183,3 +191,7 @@ async def render_upload(
         media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         filename=f"{doc_id}.docx",
     )
+
+
+# Mount static files last so API routes take precedence
+app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
